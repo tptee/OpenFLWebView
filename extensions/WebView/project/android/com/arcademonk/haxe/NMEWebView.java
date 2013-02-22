@@ -55,13 +55,6 @@ class NMEWebView extends WebView
 		setWebViewClient(new NMEWebViewClient());
 	}
 	
-	@Override
-	public boolean onKeyDown(final int keyCode, KeyEvent event) {
-		if ((keyCode == KeyEvent.KEYCODE_BACK) && !canGoBack()) NMEWebView.APINavigate();
-		
-		return super.onKeyDown(keyCode, event);
-	}
-	
 	private class NMEWebViewClient extends WebViewClient {
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
