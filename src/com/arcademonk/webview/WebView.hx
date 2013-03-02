@@ -22,11 +22,11 @@ package com.arcademonk.webview;
 		private static function checkAPI():Void
 		{
 			#if android
-				if (APIInit == null) APIInit = nme.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APIInit", "(Lorg/haxe/nme/HaxeObject;)V");
+				if (APIInit == null) APIInit = nme.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APIInit", "(Lorg/haxe/nme/HaxeObject;Z)V");
 				if (APINavigate == null) APINavigate = nme.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APINavigate", "(Ljava/lang/String;)V");
 				if (APIDestroy == null) APIDestroy = nme.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APIDestroy", "()V");
 			#elseif iphone
-                if (APIInit == null) APIInit = nme.Loader.load("webviewAPIInit", 2);
+                if (APIInit == null) APIInit = nme.Loader.load("webviewAPIInit", 2/*TODO: 3*/);
 				if (APINavigate == null) APINavigate = nme.Loader.load("webviewAPINavigate", 1);
 				if (APIDestroy == null) APIDestroy = nme.Loader.load("webviewAPIDestroy", 0);
 			#end
@@ -37,17 +37,17 @@ package com.arcademonk.webview;
 			checkAPI();
 			
 			#if android
-                if (method == "init") nme.Lib.postUICallback(function() { APIInit(args[0]); });
+                if (method == "init") nme.Lib.postUICallback(function() { APIInit(args[0], args[1] == true); });
                 if (method == "navigate") nme.Lib.postUICallback(function() { APINavigate(args[0]); });
                 if (method == "destroy") nme.Lib.postUICallback(function() { APIDestroy(); });
 			#elseif iphone
-				if (method == "init") APIInit(args[0].onDestroyed, args[0].onURLChanging);
+				if (method == "init") APIInit(args[0].onDestroyed, args[0].onURLChanging /*TODO: , args[1]*/);
                 if (method == "navigate") APINavigate(args[0]);
                 if (method == "destroy") APIDestroy();
 			#end
 		}
 		
-		public static function init():Void
+		public static function init(withPopup:Bool = false):Void
 		{
 			if (listener == null)
 			{
@@ -60,7 +60,7 @@ package com.arcademonk.webview;
 				listener.onDestroyedSignal.add(onDestroyed.dispatch);
 				listener.onURLChangingSignal.add(onURLChanging.dispatch);
 				
-				APICall("init", [listener]);
+				APICall("init", [listener, withPopup]);
 			}
 		}
 		

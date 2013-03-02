@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-    <java path="project/android" if="android" />
+	<!-- Assets -->
+    <assets path="/assets" include="*" />
+	
+	<java path="project/android" if="android" />
     
     <dependency name="UIKit.framework" if="ios"/>
     <ndll name="nmewebview" if="ios" />

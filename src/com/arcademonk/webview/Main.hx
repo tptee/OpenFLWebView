@@ -38,16 +38,16 @@ class Main extends Sprite
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 		#end
 		
-        try
-        {
-            WebView.onURLChanging.add(function(url:String):Void {
-                trace("onURLChanging: " + url);
-                if (url.indexOf("google.com") != -1) WebView.navigate("http://www.facebook.com");
-            });
+		WebView.onURLChanging.add(function(url:String):Void {
+			trace("onURLChanging: " + url);
+			if (url.indexOf("google.com") != -1) WebView.navigate("http://www.facebook.com");
+		});
 		
-            WebView.navigate("http://www.google.com");
-        } catch (e:Dynamic) {
-            trace(e);
-        }
+		WebView.onDestroyed.add(function():Void {
+			trace("onDestroyed");
+		});
+		
+		WebView.init(true);
+		WebView.navigate("http://www.google.com");
 	}
 }
