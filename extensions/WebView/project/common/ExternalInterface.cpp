@@ -28,8 +28,8 @@ extern "C" {
 }
 
 #ifdef IPHONE
-    void webviewAPIInit (value _onDestroyedCallback, value _onURLChangingCallback) { init(_onDestroyedCallback, _onURLChangingCallback); }
-	DEFINE_PRIM (webviewAPIInit, 2);
+    void webviewAPIInit (value _onDestroyedCallback, value _onURLChangingCallback, value withPopup) { init(_onDestroyedCallback, _onURLChangingCallback, val_bool(withPopup)); }
+	DEFINE_PRIM (webviewAPIInit, 3);
 	
 	void webviewAPINavigate (value url) { navigate(val_string(url)); }
 	DEFINE_PRIM (webviewAPINavigate, 1);

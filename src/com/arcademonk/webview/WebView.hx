@@ -26,7 +26,7 @@ package com.arcademonk.webview;
 				if (APINavigate == null) APINavigate = nme.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APINavigate", "(Ljava/lang/String;)V");
 				if (APIDestroy == null) APIDestroy = nme.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APIDestroy", "()V");
 			#elseif iphone
-                if (APIInit == null) APIInit = nme.Loader.load("webviewAPIInit", 2/*TODO: 3*/);
+                if (APIInit == null) APIInit = nme.Loader.load("webviewAPIInit", 3);
 				if (APINavigate == null) APINavigate = nme.Loader.load("webviewAPINavigate", 1);
 				if (APIDestroy == null) APIDestroy = nme.Loader.load("webviewAPIDestroy", 0);
 			#end
@@ -41,7 +41,7 @@ package com.arcademonk.webview;
                 if (method == "navigate") nme.Lib.postUICallback(function() { APINavigate(args[0]); });
                 if (method == "destroy") nme.Lib.postUICallback(function() { APIDestroy(); });
 			#elseif iphone
-				if (method == "init") APIInit(args[0].onDestroyed, args[0].onURLChanging /*TODO: , args[1]*/);
+				if (method == "init") APIInit(args[0].onDestroyed, args[0].onURLChanging, args[1]);
                 if (method == "navigate") APINavigate(args[0]);
                 if (method == "destroy") APIDestroy();
 			#end
