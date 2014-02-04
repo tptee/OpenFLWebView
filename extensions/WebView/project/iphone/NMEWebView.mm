@@ -57,9 +57,9 @@ namespace arcademonk {
         }
         
         padding /= 2;
-        if(!withPopup) padding = 0;
+        if(!withPopup) padding = 20;
         
-		instance = [[UIWebView alloc] initWithFrame:CGRectMake(padding, padding, screen.size.width - (padding * 2), screen.size.height - (padding * 2))];
+		instance = [[UIWebView alloc] initWithFrame:CGRectMake(padding, padding, screen.size.width - (padding * 2), screen.size.height - 100)];
 		instance.delegate = webViewDelegate;
         
 		[[[UIApplication sharedApplication] keyWindow] addSubview:instance];

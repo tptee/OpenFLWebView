@@ -1,9 +1,11 @@
 package com.arcademonk.webview;
 
-import nme.display.Sprite;
-import nme.events.Event;
-import nme.Lib;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.Lib;
 
+import haxe.Timer;
 /**
  * @author Suat Eyrice
  */
@@ -13,12 +15,18 @@ class Main extends Sprite
 	static public function main() 
 	{
 		var stage = Lib.current.stage;
-		stage.scaleMode = nme.display.StageScaleMode.NO_SCALE;
-		stage.align = nme.display.StageAlign.TOP_LEFT;
+		stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
+		stage.align = flash.display.StageAlign.TOP_LEFT;
 		
+		WebView.init(false);
+		WebView.navigate("http://google.com");
+
+		haxe.Timer.delay(function() { WebView.destroy(); }, 7000);
+
 		Lib.current.addChild(new Main());
 	}
 	
+	/*
 	public function new() 
 	{
 		super();
@@ -50,4 +58,5 @@ class Main extends Sprite
 		WebView.init(true);
 		WebView.navigate("http://www.google.com");
 	}
+	*/
 }

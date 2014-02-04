@@ -4,9 +4,10 @@ package com.arcademonk.webview;
  * @author Suat Eyrice
  */
 
-#if nme
+#if openfl
 	import msignal.Signal;
-	import nme.errors.Error;
+	import flash.errors.Error;
+	import flash.Lib;
 	
 	class WebView 
 	{
@@ -22,13 +23,13 @@ package com.arcademonk.webview;
 		private static function checkAPI():Void
 		{
 			#if android
-				if (APIInit == null) APIInit = nme.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APIInit", "(Lorg/haxe/nme/HaxeObject;Z)V");
-				if (APINavigate == null) APINavigate = nme.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APINavigate", "(Ljava/lang/String;)V");
-				if (APIDestroy == null) APIDestroy = nme.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APIDestroy", "()V");
+				if (APIInit == null) APIInit = openfl.utils.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APIInit", "(Lorg/haxe/openfl/HaxeObject;Z)V");
+				if (APINavigate == null) APINavigate = openfl.utils.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APINavigate", "(Ljava/lang/String;)V");
+				if (APIDestroy == null) APIDestroy = openfl.utils.JNI.createStaticMethod("com.arcademonk.haxe.NMEWebView", "APIDestroy", "()V");
 			#elseif iphone
-                if (APIInit == null) APIInit = nme.Loader.load("webviewAPIInit", 3);
-				if (APINavigate == null) APINavigate = nme.Loader.load("webviewAPINavigate", 1);
-				if (APIDestroy == null) APIDestroy = nme.Loader.load("webviewAPIDestroy", 0);
+                if (APIInit == null) APIInit = Lib.load("openfl","webviewAPIInit", 3);
+				if (APINavigate == null) APINavigate = Lib.load("openfl", "webviewAPINavigate", 1);
+				if (APIDestroy == null) APIDestroy = Lib.load("openfl", "webviewAPIDestroy", 0);
 			#end
 		}
 		
